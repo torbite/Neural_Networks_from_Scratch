@@ -45,12 +45,12 @@ def relu(z):
 def no_actv(z):
     return z
 
-#def softmax(z):
+#def sigmoid(z):
 #    return 1/1 + math.e**(-z)
 
 
 
-def softmax(z):
+def sigmoid(z):
     z = np.array(z)
     #z_max = np.max(z)
     #exp_values = np.exp(z - z_max)
@@ -84,7 +84,7 @@ class Function():
 class Dense_layer():
 
     def __init__(self, input_shape, output_shape, actvation):
-        self.actvations = {'RELU': relu, 'None' : no_actv, 'SoftMax':softmax}
+        self.actvations = {'RELU': relu, 'None' : no_actv, 'sigmoid':sigmoid}
         self.input_shape = input_shape
         self.output_shape = output_shape
         self.layer = [Function([1] * input_shape, 1, self.actvations[actvation])] * output_shape
