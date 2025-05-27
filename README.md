@@ -8,10 +8,9 @@ The main goal of this repository is to provide a hands-on approach to understand
 
 ## Project Structure
 
-- `neural.py` and `train.py`-> First try of implementing the MLPs neural Networks
-- `neural2.py`: Second and final implementation of AI
-- `train2.py`: A  file to train AIs using the neural2.py code and save the trained model as `neural_network.pkl` using the pickle library
-- `test.py`: A file to load and use the previously trained models
+- `neural.py` and `train.py`-> First try of implementing the MLPs neural Networks.
+- `neural2.py`: Second and final implementation of AI. The code saves the trained model as `neural_network.pkl` using the pickle library.
+- `test.py`: A file to load and use the previously trained models.
 
 ## Features
 
