@@ -24,6 +24,6 @@ The main goal of this repository is to provide a hands-on approach to understand
 ## Requirements
 
 - Python 3.x
-- Only standard libraries (`math`, `pickle`, `copy`, `numpy`).
+- Only standard libraries: `math`, `pickle`, `copy`, `numpy`.
 
 
