@@ -1,11 +1,19 @@
 from neural2 import *
 
 new = NeuralNetwork(1, [1,4,1],'sigmoid')
-X = [[1],[2],[3],[4],[5]]
-Y = [0,0,1,1,1]
+
+X= []
+Y = []
+for i in range(1000):
+    X.append([i])
+    Y.append(0 if i<3 else 1)
+
+print(X)
+print(Y)
 for i in range(100000):
     new.train( X, Y, 0.0005)
-print(new([0]))
+for i in range(10):
+    print(new([0]))
 
 with open('neural_network.pkl', 'wb') as f:
     pickle.dump(new, f)
