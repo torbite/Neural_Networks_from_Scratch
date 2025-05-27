@@ -74,7 +74,7 @@ class Function():
 
         for i in range(n):
             wx_product += self.w[i] * x[i]
-
+        # print('wx_product', wx_product, self.w, x)
         result = wx_product + self.b
         result = self.activation(result)
         #print('a_out' ,result, self.activation)
@@ -146,23 +146,39 @@ class NeuralNetwork():
                         for i in range(len(X)):
                             sumaturio += (self(X[i])[0] - Y[i]) * (suma) * getTill(self, layer_i, fct_i, w_i, X[i], 0)
                         w_new = self.layers[layer_i].layer[fct_i].w[w_i] - alpha * sumaturio
-                        ws_new.append(w_new)
+                        ws_new.append(copy.deepcopy(w_new))
                     else:
                         sumaturio = 0
                         for i in range(len(X)):
                             sumaturio += (self(X[i])[0] - Y[i]) * (suma) * X[i][0]
                         w_new = self.layers[layer_i].layer[fct_i].w[w_i] - alpha * sumaturio
-                        ws_new.append(w_new)
-                self.layers[layer_i].layer[fct_i].w = ws_new
-                self.layers[layer_i].layer[fct_i].b = b_new
+                        ws_new.append(copy.deepcopy(w_new))
+                self.layers[layer_i].layer[fct_i].w = copy.deepcopy(ws_new)
+                self.layers[layer_i].layer[fct_i].b = copy.deepcopy(b_new)
 
 if __name__ == "__main__":
-    neu = NeuralNetwork(1, [1,4,1],'None')
-    X = [[1],[2],[3],[4],[5]]
-    Y = [0,2,4,6 ,8]
-    for i in range(100000):
-        neu.train( X, Y, 0.0001)
-        print(neu([0]))
+    neu = NeuralNetwork(1, [1],'None')
+
+    for layer in neu.layers:
+        for layer in layer.layer:
+            print(layer.w, layer.b, layer.activation)
+
+    X = []
+    Y = []
+    for i in range(100):
+        X.append([i])
+        Y.append(i*2)
+    for i in range(1001):
+        neu.train( X, Y, 0.0000001)
+        print(neu([1]))
+        if i % 100 == 0:
+            print(f"Iteration {i}:")
+            for i in range(10):
+                print(i, neu([i]))
+    
+    for layer in neu.layers:
+        for layer in layer.layer:
+            print(layer.w, layer.b, layer.activation)
 
     with open('neural_network.pkl', 'wb') as f:
         pickle.dump(neu, f)
